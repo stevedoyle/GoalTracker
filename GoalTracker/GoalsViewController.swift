@@ -79,6 +79,7 @@ class GoalsViewController: UITableViewController {
         let goal = goals[indexPath.row] as Goal
         
         cell.titleLabel.text = goal.title()
+        cell.completedLabel.text = "\(goal.completedDistance) \(goal.distanceUnit) completed"
         cell.remainingLabel.text = "\(goal.distanceRemaining()) \(goal.distanceUnit) remaining"
         cell.percentCompleteLabel.text = String(format: "%0.1f%%", arguments: [goal.percentComplete()])
 

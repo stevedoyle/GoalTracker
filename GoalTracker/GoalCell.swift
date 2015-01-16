@@ -11,6 +11,7 @@ import UIKit
 class GoalCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var completedLabel: UILabel!
     @IBOutlet weak var remainingLabel: UILabel!
     @IBOutlet weak var percentCompleteLabel: UILabel!
     

@@ -14,7 +14,7 @@ class UpdateGoalViewController: UITableViewController {
     @IBOutlet weak var goalTitleLabel: UILabel!
     @IBOutlet weak var distanceCompletedLabel: UILabel!
     @IBOutlet weak var distanceRemainingLabel: UILabel!
-    
+ 
     var goalToUpdate: Goal!
     
     override func viewDidLoad() {
@@ -22,8 +22,8 @@ class UpdateGoalViewController: UITableViewController {
         
         if let goal = goalToUpdate {
             goalTitleLabel.text = goal.title()
-            distanceCompletedLabel.text = "\(goal.completedDistance) km completed"
-            distanceRemainingLabel.text = "\(goal.distanceRemaining()) km remaining"
+            distanceCompletedLabel.text = "\(goal.completedDistance) \(goal.distanceUnit) completed"
+            distanceRemainingLabel.text = "\(goal.distanceRemaining()) \(goal.distanceUnit) remaining"
         }
 
         // Uncomment the following line to preserve selection between presentations
