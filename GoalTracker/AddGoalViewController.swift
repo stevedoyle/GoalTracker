@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddGoalViewController: UITableViewController {
 
@@ -14,8 +15,9 @@ class AddGoalViewController: UITableViewController {
     @IBOutlet weak var distanceTextField: UITextField!
     @IBOutlet weak var distanceUnitSegControl: UISegmentedControl!
     
+    let managedContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    
     var distanceUnits:[String]!
-    var goal:Goal!
     var activity:String = "Run"
     
     @IBAction func selectedActivity(segue:UIStoryboardSegue) {
@@ -25,6 +27,20 @@ class AddGoalViewController: UITableViewController {
             activity = selectedActivity
         }
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func createGoal() {
+        let entity = NSEntityDescription.entityForName("Goal", inManagedObjectContext: managedContext!)
+        let goal = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext!)
+        goal.setValue(self.activityDetailLabel.text!, forKey: "activity")
+        goal.setValue((distanceTextField.text as NSString).integerValue, forKey: "targetDistance")
+        goal.setValue(distanceUnits[distanceUnitSegControl.selectedSegmentIndex], forKey: "distanceUnit")
+        goal.setValue(0, forKey: "completedDistance")
+
+        var error: NSError?
+        if !managedContext!.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
     }
     
     override func viewDidLoad() {
@@ -47,9 +63,7 @@ class AddGoalViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveGoalDetail" {
-            goal = Goal(activity: self.activityDetailLabel.text!,
-                targetDistance: (distanceTextField.text as NSString).integerValue,
-                distanceUnit: distanceUnits[distanceUnitSegControl.selectedSegmentIndex])
+            createGoal()
         }
         
         if segue.identifier == "PickActivity" {

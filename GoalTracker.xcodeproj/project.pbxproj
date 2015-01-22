@@ -15,11 +15,11 @@
 		AA16C8DE1A6870BB00E94D21 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA16C8DC1A6870BB00E94D21 /* LaunchScreen.xib */; };
 		AA16C8EA1A6870BB00E94D21 /* GoalTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8E91A6870BB00E94D21 /* GoalTrackerTests.swift */; };
 		AA16C8F41A6875AD00E94D21 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8F31A6875AD00E94D21 /* GoalsViewController.swift */; };
-		AA16C8F61A6876DF00E94D21 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8F51A6876DF00E94D21 /* Goal.swift */; };
 		AA16C8F81A687FBB00E94D21 /* GoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8F71A687FBB00E94D21 /* GoalCell.swift */; };
 		AA16C8FA1A688ED500E94D21 /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8F91A688ED500E94D21 /* AddGoalViewController.swift */; };
 		AA16C8FC1A6947EF00E94D21 /* ActivityPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8FB1A6947EF00E94D21 /* ActivityPickerViewController.swift */; };
 		AA16C8FE1A6973E300E94D21 /* UpdateGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C8FD1A6973E300E94D21 /* UpdateGoalViewController.swift */; };
+		AA16C9351A6C79CD00E94D21 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16C9341A6C79CD00E94D21 /* Goal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,11 +45,11 @@
 		AA16C8E81A6870BB00E94D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA16C8E91A6870BB00E94D21 /* GoalTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTrackerTests.swift; sourceTree = "<group>"; };
 		AA16C8F31A6875AD00E94D21 /* GoalsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
-		AA16C8F51A6876DF00E94D21 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		AA16C8F71A687FBB00E94D21 /* GoalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalCell.swift; sourceTree = "<group>"; };
 		AA16C8F91A688ED500E94D21 /* AddGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
 		AA16C8FB1A6947EF00E94D21 /* ActivityPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPickerViewController.swift; sourceTree = "<group>"; };
 		AA16C8FD1A6973E300E94D21 /* UpdateGoalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateGoalViewController.swift; sourceTree = "<group>"; };
+		AA16C9341A6C79CD00E94D21 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,13 +97,13 @@
 				AA16C8DA1A6870BB00E94D21 /* Images.xcassets */,
 				AA16C8DC1A6870BB00E94D21 /* LaunchScreen.xib */,
 				AA16C8D21A6870BB00E94D21 /* GoalTracker.xcdatamodeld */,
+				AA16C9341A6C79CD00E94D21 /* Goal.swift */,
 				AA16C8CE1A6870BB00E94D21 /* Supporting Files */,
 				AA16C8F31A6875AD00E94D21 /* GoalsViewController.swift */,
-				AA16C8F51A6876DF00E94D21 /* Goal.swift */,
-				AA16C8F71A687FBB00E94D21 /* GoalCell.swift */,
 				AA16C8F91A688ED500E94D21 /* AddGoalViewController.swift */,
 				AA16C8FB1A6947EF00E94D21 /* ActivityPickerViewController.swift */,
 				AA16C8FD1A6973E300E94D21 /* UpdateGoalViewController.swift */,
+				AA16C8F71A687FBB00E94D21 /* GoalCell.swift */,
 			);
 			path = GoalTracker;
 			sourceTree = "<group>";
@@ -241,7 +241,7 @@
 				AA16C8F81A687FBB00E94D21 /* GoalCell.swift in Sources */,
 				AA16C8FE1A6973E300E94D21 /* UpdateGoalViewController.swift in Sources */,
 				AA16C8D11A6870BB00E94D21 /* AppDelegate.swift in Sources */,
-				AA16C8F61A6876DF00E94D21 /* Goal.swift in Sources */,
+				AA16C9351A6C79CD00E94D21 /* Goal.swift in Sources */,
 				AA16C8D41A6870BB00E94D21 /* GoalTracker.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,6 +440,7 @@
 				AA16C8EF1A6870BB00E94D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA16C8F01A6870BB00E94D21 /* Build configuration list for PBXNativeTarget "GoalTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +449,7 @@
 				AA16C8F21A6870BB00E94D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

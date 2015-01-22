@@ -7,26 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
-class GoalsViewController: UITableViewController {
+class GoalsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    var goals: [Goal] = [Goal(activity:"Run", targetDistance:100, distanceUnit:"km")]
-    //var goals = [Goal]()
+    let managedContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+    
+    var fetchedResultsController: NSFetchedResultsController = NSFetchedResultsController()
     
     @IBAction func cancelToGoalsViewController(segue:UIStoryboardSegue) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func saveGoalDetail(segue:UIStoryboardSegue) {
-        let addGoalViewController = segue.sourceViewController as AddGoalViewController
-        
-        // Add a new goal to the goals array
-        goals.append(addGoalViewController.goal)
-        
-        // update the tableView
-        let indexPath = NSIndexPath(forRow: goals.count-1, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        
         // hide the add goal view controller
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -43,6 +36,18 @@ class GoalsViewController: UITableViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func getFetchedResultsController() -> NSFetchedResultsController {
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: goalFetchRequest(), managedObjectContext: managedContext!, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }
+    
+    func goalFetchRequest() -> NSFetchRequest {
+        let fetchRequest = NSFetchRequest(entityName: "Goal")
+        let sortDescriptor = NSSortDescriptor(key: "targetDistance", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,7 +55,19 @@ class GoalsViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
+        fetchedResultsController = getFetchedResultsController()
+        fetchedResultsController.delegate = self
+        fetchedResultsController.performFetch(nil)
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.reloadData()
+    }
+    
+    func numberOfGoals() -> Int {
+        return fetchedResultsController.sections![0].numberOfObjects
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,20 +80,20 @@ class GoalsViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return fetchedResultsController.sections!.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return goals.count
+        return fetchedResultsController.sections![section].numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GoalCell", forIndexPath: indexPath) as GoalCell
 
         // Configure the cell...
-        let goal = goals[indexPath.row] as Goal
+        let goal = fetchedResultsController.objectAtIndexPath(indexPath) as Goal
         
         cell.titleLabel.text = goal.title()
         cell.completedLabel.text = "\(goal.completedDistance) \(goal.distanceUnit) completed"
@@ -90,14 +107,10 @@ class GoalsViewController: UITableViewController {
         if segue.identifier == "UpdateGoal" {
             let cell = sender as GoalCell
             let indexPath = tableView.indexPathForCell(cell)
-            let selectedGoalIndex = indexPath?.row
-            if let index = selectedGoalIndex {
-                let selectedGoal = goals[index]
-
-                let navController = segue.destinationViewController as UINavigationController
-                let updateGoalViewController = navController.topViewController as UpdateGoalViewController
-                updateGoalViewController.goalToUpdate = selectedGoal
-            }
+            let selectedGoal = fetchedResultsController.objectAtIndexPath(indexPath!) as Goal
+            let navController = segue.destinationViewController as UINavigationController
+            let updateGoalViewController = navController.topViewController as UpdateGoalViewController
+            updateGoalViewController.goalToUpdate = selectedGoal
         }
     }
 
@@ -109,17 +122,16 @@ class GoalsViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            let managedObject:NSManagedObject = fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
+            managedContext?.deleteObject(managedObject)
+            managedContext?.save(nil)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

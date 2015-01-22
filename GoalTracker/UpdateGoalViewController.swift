@@ -15,6 +15,8 @@ class UpdateGoalViewController: UITableViewController {
     @IBOutlet weak var distanceCompletedLabel: UILabel!
     @IBOutlet weak var distanceRemainingLabel: UILabel!
  
+    let managedContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+
     var goalToUpdate: Goal!
     
     override func viewDidLoad() {
@@ -41,6 +43,7 @@ class UpdateGoalViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SaveUpdatedGoalDetail" {
             goalToUpdate.updateCompletedDistance((distanceTextField.text as NSString).floatValue)
+            managedContext?.save(nil)
         }
     }
 

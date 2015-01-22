@@ -2,26 +2,26 @@
 //  Goal.swift
 //  GoalTracker
 //
-//  Created by Stephen Doyle on 15/01/2015.
+//  Created by Stephen Doyle on 18/01/2015.
 //  Copyright (c) 2015 Stephen Doyle. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-class Goal: NSObject {
-    var activity: String
-    var targetDistance: Int
-    var distanceUnit: String
-    var completedDistance: Float
-    
-    init(activity: String, targetDistance: Int, distanceUnit: String) {
-        self.activity = activity
-        self.targetDistance = targetDistance
-        self.distanceUnit = distanceUnit
-        self.completedDistance = 0.0
-        super.init()
+class Goal: NSManagedObject, Printable {
+
+    @NSManaged var activity: String
+    @NSManaged var targetDistance: NSNumber
+    @NSManaged var distanceUnit: String
+    @NSManaged var completedDistance: NSNumber
+
+    override var description: String {
+        get {
+            return "Goal: \(activity) \(targetDistance)\(distanceUnit) with \(completedDistance) done"
+        }
     }
-    
+
     func title() -> String {
         return "\(self.activity) \(self.targetDistance) \(self.distanceUnit)"
     }
@@ -30,17 +30,17 @@ class Goal: NSObject {
         if targetDistance == 0 {
             return 0.0
         }
-        return completedDistance / Float(targetDistance) * 100
+        return completedDistance.floatValue / targetDistance.floatValue * 100
     }
     
     func distanceRemaining() -> Float {
-        if Float(targetDistance) <= completedDistance {
+        if targetDistance.floatValue <= completedDistance.floatValue {
             return 0.0
         }
-        return Float(targetDistance) - completedDistance
+        return targetDistance.floatValue - completedDistance.floatValue
     }
     
     func updateCompletedDistance(distance: Float) {
-        completedDistance += distance
+        completedDistance = completedDistance.floatValue + distance
     }
 }
