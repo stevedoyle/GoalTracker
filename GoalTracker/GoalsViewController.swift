@@ -94,8 +94,7 @@ class GoalsViewController: UITableViewController, NSFetchedResultsControllerDele
         
         let cell = tableView.dequeueReusableCellWithIdentifier("GoalCell", forIndexPath: indexPath) as GoalCell
         cell.titleLabel.text = goal.title()
-        cell.completedLabel.text = "\(goal.completedDistance) \(goal.distanceUnit) completed"
-        cell.remainingLabel.text = "\(goal.distanceRemaining()) \(goal.distanceUnit) remaining"
+        cell.remainingLabel.text = "\(goal.distanceRemaining()) \(goal.distanceUnit) to go"
         cell.percentCompleteLabel.text = String(format: "%0.1f%%", arguments: [goal.percentComplete()])
 
         return cell
