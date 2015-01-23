@@ -97,13 +97,13 @@
 				AA16C8DA1A6870BB00E94D21 /* Images.xcassets */,
 				AA16C8DC1A6870BB00E94D21 /* LaunchScreen.xib */,
 				AA16C8D21A6870BB00E94D21 /* GoalTracker.xcdatamodeld */,
-				AA16C9341A6C79CD00E94D21 /* Goal.swift */,
 				AA16C8CE1A6870BB00E94D21 /* Supporting Files */,
 				AA16C8F31A6875AD00E94D21 /* GoalsViewController.swift */,
 				AA16C8F91A688ED500E94D21 /* AddGoalViewController.swift */,
 				AA16C8FB1A6947EF00E94D21 /* ActivityPickerViewController.swift */,
 				AA16C8FD1A6973E300E94D21 /* UpdateGoalViewController.swift */,
 				AA16C8F71A687FBB00E94D21 /* GoalCell.swift */,
+				AA16C9341A6C79CD00E94D21 /* Goal.swift */,
 			);
 			path = GoalTracker;
 			sourceTree = "<group>";

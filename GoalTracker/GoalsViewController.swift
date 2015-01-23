@@ -25,8 +25,6 @@ class GoalsViewController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     @IBAction func saveUpdatedGoalDetail(segue:UIStoryboardSegue) {
-        let updateGoalViewController = segue.sourceViewController as UpdateGoalViewController
-        
         // Goal object has been updated in the detail view
         
         // Refresh the table
@@ -90,11 +88,11 @@ class GoalsViewController: UITableViewController, NSFetchedResultsControllerDele
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("GoalCell", forIndexPath: indexPath) as GoalCell
+        let goal = fetchedResultsController.objectAtIndexPath(indexPath) as Goal
 
         // Configure the cell...
-        let goal = fetchedResultsController.objectAtIndexPath(indexPath) as Goal
         
+        let cell = tableView.dequeueReusableCellWithIdentifier("GoalCell", forIndexPath: indexPath) as GoalCell
         cell.titleLabel.text = goal.title()
         cell.completedLabel.text = "\(goal.completedDistance) \(goal.distanceUnit) completed"
         cell.remainingLabel.text = "\(goal.distanceRemaining()) \(goal.distanceUnit) remaining"
